@@ -120,7 +120,7 @@ jobs:
           name: Check for vulnerabilities
           command: |
             cd frontend
-            npm audit fix --audit-level=critical --force
+            npm audit --audit-level=critical
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
@@ -147,7 +147,7 @@ jobs:
           name: Check for vulnerabilities
           command: |
             cd backend
-            npm audit fix --audit-level=critical --force
+            npm audit --audit-level=critical
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
