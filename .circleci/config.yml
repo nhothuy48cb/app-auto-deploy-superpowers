@@ -353,6 +353,105 @@ jobs:
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
 
+  deploy-backend:
+    docker:
+      - image: python:3.9.1-alpine3.12
+        environment:
+          NODE_ENV: "production"
+          VERSION: "1"
+          ENVIRONMENT: "production"
+          TYPEORM_CONNECTION: $TYPEORM_CONNECTION
+          TYPEORM_HOST: $TYPEORM_HOST
+          TYPEORM_USERNAME: $TYPEORM_USERNAME
+          TYPEORM_PASSWORD: $TYPEORM_PASSWORD
+          TYPEORM_DATABASE: $TYPEORM_DATABASE
+          TYPEORM_PORT: $TYPEORM_PORT
+          TYPEORM_ENTITIES: $TYPEORM_ENTITIES       
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: ["14:45:30:21:c6:8d:8d:5f:ab:b8:24:3c:43:c2:70:90"]
+      - attach_workspace: 
+          at: ~/
+      - restore_cache:
+          keys:
+            - build-backend
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --update ansible nodejs npm tar gzip
+      - run:
+          name: Deploy backend
+          command: |
+            cd backend
+            npm i
+            npm run build
+            cd ..
+            # Zip the directory
+            tar -C backend -czvf artifact.tar.gz .
+            ls
+            cd .circleci/ansible
+            echo "Contents  of the inventory.txt file is -------"
+            cat inventory.txt
+            ansible-playbook -i inventory.txt deploy-backend.yml
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # Here's where you will add some code to rollback on failure
+      # - destroy-environment:
+          # workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+
+  smoke-test:
+    docker:
+      - image: python:3.9.1-alpine3.12
+    steps:
+      # Checkout code from git
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --update curl
+            pip install awscli
+      - run:
+          name: Get backend url
+          command: |
+            BACKEND_IP=$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
+            API_URL="http://${BACKEND_IP}:3030"
+      - run:
+          name: Backend smoke test.
+          command: |
+            if curl "${API_URL}/api/status" | grep "ok"
+            then
+                return 0
+            else
+                return 1
+            fi
+      - run:
+          name: Frontend smoke test.
+          command: |
+            URL="http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website-us-west-2.amazonaws.com"             
+            echo ${URL} 
+            if curl -s ${URL} | grep "Welcome"
+            then
+              exit 0
+            else
+              exit 1
+            fi
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # Here's where you will add some code to rollback on failure
+      # - destroy-environment:
+          # workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+      # - revert-migrations:
+          # workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+
 workflows:
   default:
     jobs:
@@ -377,3 +476,7 @@ workflows:
           requires: [configure-infrastructure]
       - deploy-frontend:
           requires: [run-migrations]
+      - deploy-backend:
+          requires: [run-migrations]
+      - smoke-test:
+          requires: [deploy-backend, deploy-frontend]
