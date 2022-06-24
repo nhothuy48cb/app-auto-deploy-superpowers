@@ -1,5 +1,11 @@
 ---
 
+- name: "Copy archive backend file."
+  become: true
+  copy:
+    src: /root/project/artifact.tar.gz
+    dest: /home/ubuntu/artifact.tar.gz
+
 - name: "Creates backend app directory."
   file:
     path: ~/backend-app
@@ -7,10 +13,10 @@
 
 - name: "Unarchive backend files."
   unarchive:
-    src: artifact.tar.gz
+    src: /home/ubuntu/artifact.tar.gz
     dest: ~/backend-app
 
-- name: "Installing node dependencies"
+- name: "Installing node dependencies."
   shell: |
     cd ~/backend-app
     npm i
@@ -25,11 +31,6 @@
 - name: "Print message."
   debug:
     msg: "{{ execute_node.stdout_lines }}"
-
-- name: "Configure pm2 to start as service."
-  become: true
-  shell: |
-    env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
     
   environment:
     ENVIRONMENT: production
