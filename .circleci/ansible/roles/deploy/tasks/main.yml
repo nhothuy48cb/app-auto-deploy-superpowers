@@ -1,45 +1,38 @@
 ---
 
-- name: "Copy archive backend file."
-  become: true
-  copy:
-    src: /root/project/artifact.tar.gz
-    dest: /home/ubuntu/artifact.tar.gz
-
-- name: "Creates backend app directory."
+- name: "Create backend app directory."
   file:
     path: ~/backend-app
     state: directory
 
-- name: "Unarchive backend files."
-  unarchive:
-    src: /home/ubuntu/artifact.tar.gz
-    dest: ~/backend-app
+- name: "Copy archive backend app file."
+  become: true
+  copy:
+    src: /root/project/artifact.tar.gz
+    dest: ~/backend-app/artifact.tar.gz
 
-- name: "Installing node dependencies."
-  shell: |
-    cd ~/backend-app
-    npm i
+- name: "Unarchive backend app file."
+  become: true
+  shell : |
+      cd ~/backend-app
+      tar xvzf artifact.tar.gz -C .
 
 - name: "Run server."
-  shell: |
-    cd ~/backend-app/dist
-    pm2 stop default
-    pm2 start main.js
-  register: execute_node
+  become: true
+  shell : |
+      cd ~/backend-app
+      npm install
+      pm2 stop default
+      pm2 start npm -- start
 
-- name: "Print message."
-  debug:
-    msg: "{{ execute_node.stdout_lines }}"
-    
-  environment:
-    ENVIRONMENT: production
-    TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
-    TYPEORM_MIGRATIONS_DIR: "./migrations"
-    TYPEORM_MIGRATIONS: "./migrations/*.js"
-    TYPEORM_ENTITIES: "./modules/domain/**/*.entity.js"
-    TYPEORM_HOST: "{{ lookup('env', 'TYPEORM_HOST') }}"
-    TYPEORM_PORT: "{{ lookup('env', 'TYPEORM_PORT') }}"
-    TYPEORM_USERNAME: "{{ lookup('env', 'TYPEORM_USERNAME') }}"
-    TYPEORM_PASSWORD: "{{ lookup('env', 'TYPEORM_PASSWORD') }}"
-    TYPEORM_DATABASE: "{{ lookup('env', 'TYPEORM_DATABASE') }}"
+environment:
+  ENVIRONMENT: production
+  TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
+  TYPEORM_MIGRATIONS_DIR: "./migrations"
+  TYPEORM_MIGRATIONS: "./migrations/*.js"
+  TYPEORM_ENTITIES: "./modules/domain/**/*.entity.js"
+  TYPEORM_HOST: "{{ lookup('env', 'TYPEORM_HOST') }}"
+  TYPEORM_PORT: "{{ lookup('env', 'TYPEORM_PORT') }}"
+  TYPEORM_USERNAME: "{{ lookup('env', 'TYPEORM_USERNAME') }}"
+  TYPEORM_PASSWORD: "{{ lookup('env', 'TYPEORM_PASSWORD') }}"
+  TYPEORM_DATABASE: "{{ lookup('env', 'TYPEORM_DATABASE') }}"
