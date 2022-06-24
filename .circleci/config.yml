@@ -278,12 +278,12 @@ jobs:
 
   run-migrations:
     docker:
-      - image: sleavely/node-awscli:14.x
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - restore_cache:
           keys:
-            - build-backend
+            - [backend-build]
       - run:
           name: Run migrations
           command: |
@@ -295,6 +295,7 @@ jobs:
 
             cd backend
             npm install
+            npm run build
             npm run migrations > migrations_dump.txt
 
             echo "migrations_dump -------"
@@ -325,7 +326,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - build-frontend
+            - [frontend-build]
       - run:
           name: Install dependencies
           command: |
@@ -384,17 +385,19 @@ jobs:
           at: ~/
       - restore_cache:
           keys:
-            - build-backend
+            - [backend-build]
       - run:
           name: Install dependencies
           command: |
-            apk add --update ansible nodejs npm tar gzip
+            apk add --update curl nodejs npm
+            apk add --update ansible zip
+            apk add --update openssh-client tar gzip
+            pip install awscli
       - run:
           name: Deploy backend
           command: |
             cd backend
-            npm i
-            npm install typescript@rc
+            npm install
             npm run build
             cd ..
             # Zip the directory
