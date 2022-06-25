@@ -385,25 +385,16 @@ jobs:
             npm install typescript@latest -g
             npm install
             npm run build
-            
-            echo "zip---"
             tar -czf artifact.tar.gz dist/* package*
-            
-            echo "Pwd & ls---"
-            pwd
-            ls
-            
-            echo "Copy---" 
             cd ..
-            ls
             cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
-
-            echo "Check copy file---"
-            cd .circleci/ansible/roles/deploy/files
-            ls
       - run:
           name: Deploy backend
           command: |
+            export TYPEORM_MIGRATIONS_DIR=./migrations
+            export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
+            export TYPEORM_MIGRATIONS=./migrations/*.ts
+            
             cd .circleci/ansible
             cat inventory.txt
             export ANSIBLE_HOST_KEY_CHECKING=False
