@@ -362,18 +362,7 @@ jobs:
 
   deploy-backend:
     docker:
-      - image: python:3.9.1-alpine3.12
-        environment:
-          NODE_ENV: "production"
-          VERSION: "1"
-          ENVIRONMENT: "production"
-          TYPEORM_CONNECTION: $TYPEORM_CONNECTION
-          TYPEORM_HOST: $TYPEORM_HOST
-          TYPEORM_USERNAME: $TYPEORM_USERNAME
-          TYPEORM_PASSWORD: $TYPEORM_PASSWORD
-          TYPEORM_DATABASE: $TYPEORM_DATABASE
-          TYPEORM_PORT: $TYPEORM_PORT
-          TYPEORM_ENTITIES: $TYPEORM_ENTITIES       
+      - image: python:3.9.1-alpine3.12     
     steps:
       - checkout
       - add_ssh_keys:
@@ -390,18 +379,19 @@ jobs:
             apk add --update openssh-client tar gzip
             pip install awscli
       - run:
-          name: Deploy backend
+          name: Package backend
           command: |
             cd backend
             npm install typescript@latest -g
             npm install
             npm run build
+            tar -czf artifact.tar.gz dist/* package*
             cd ..
-            # Zip the directory
-            tar -C backend -czvf artifact.tar.gz .
-            
+            cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
+      - run:
+          name: Deploy backend
+          command: |
             cd .circleci/ansible
-            echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
             export ANSIBLE_HOST_KEY_CHECKING=False
             ansible-playbook -i inventory.txt deploy-backend.yml
@@ -412,8 +402,8 @@ jobs:
           event: fail
           template: basic_fail_1
       # Here's where you will add some code to rollback on failure
-      #- destroy-environment:
-          #workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+      - destroy-environment:
+          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
 
   smoke-test:
     docker:
