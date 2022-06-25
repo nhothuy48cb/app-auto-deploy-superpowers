@@ -385,9 +385,17 @@ jobs:
             npm install typescript@latest -g
             npm install
             npm run build
+            
+            echo "zip---"
             tar -czf artifact.tar.gz dist/* package*
+            
+            echo "Pwd & ls---"
+            pwd
+            ls
+            
+            echo "Copy---" 
             cd ..
-            cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
+            cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files 
       - run:
           name: Deploy backend
           command: |
@@ -402,8 +410,8 @@ jobs:
           event: fail
           template: basic_fail_1
       # Here's where you will add some code to rollback on failure
-      - destroy-environment:
-          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+      #- destroy-environment:
+          #workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
 
   smoke-test:
     docker:
