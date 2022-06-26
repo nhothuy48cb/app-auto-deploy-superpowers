@@ -1,19 +1,19 @@
  1- URL01 
 A public git repository with my project code 
-URL01:https://github.com/nhothuy48cb/app-auto-deploy-superpowers/
+URL01: https://github.com/nhothuy48cb/app-auto-deploy-superpowers/
 
 2- URL02
 Evidence of deployed and functioning front-end application in an S3 bucket
-http://udapeople-b7f8ba3.s3-website-us-east-1.amazonaws.com/
+URL02: http://udapeople-e8780e2.s3-website-us-east-1.amazonaws.com/
 
 3- URL03
 Evidence of deployed and functioning front-end application in CloudFront
-URL03:https://dalt7zptxptcf.cloudfront.net
+URL03: http://dalt7zptxptcf.cloudfront.net
 
 4- URL04
 Evidence of healthy back-end application
-URL04:http://34.207.89.88:3030/api/status/
+URL04: http://54.237.161.120:3030/api/status/
 
 5- URL05
 Evidence of Prometheus Server
-URL05:http://ec2-44-201-118-138.compute-1.amazonaws.com:9090/
+URL05: http://ec2-18-204-230-85.compute-1.amazonaws.com:9090/
