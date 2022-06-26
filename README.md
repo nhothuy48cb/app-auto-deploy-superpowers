@@ -25,7 +25,7 @@ In this project, you will prove your mastery of the following learning objective
 #### Section 2: Deploying Working, Trustworthy Software
 |CRITERIA|MEETS SPECIFICATIONS |Files |
 |:-----|:-----|:-----|
-|Utilize Deployment Strategies to design and build CI/CD pipelines that support Continuous Delivery processes.|A public git repository with your project code. ||
+|Utilize Deployment Strategies to design and build CI/CD pipelines that support Continuous Delivery processes.|A public git repository with your project code. |[URL01](https://github.com/nhothuy48cb/app-auto-deploy-superpowers/)<br>https://github.com/nhothuy48cb/app-auto-deploy-superpowers/|
 ||***Console output of various pre-deploy job failure scenarios:***||
 ||Build Jobs that failed because of compile errors. |[SCREENSHOT01](./screenshots/SCREENSHOT01.png)|
 ||Failed unit tests. |[SCREENSHOT02](./screenshots/SCREENSHOT02.png)|

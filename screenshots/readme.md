@@ -9,8 +9,8 @@
 ## [SCREENSHOT03](./SCREENSHOT03.png)
   ![SCREENSHOT03.png](./SCREENSHOT03.png)
 
-## [SCREENSHOT04](./SCREENSHOT04.png) e-mail-Notification
-![e-mail-Notification](./SCREENSHOT04.png)
+## [SCREENSHOT04](./SCREENSHOT04.jpg) e-mail-Notification
+![e-mail-Notification](./SCREENSHOT04.jpg)
 ## [SCREENSHOT04](./SCREENSHOT04.png) slack-Notification
 ![slack-Notification](./SCREENSHOT04.png)
   
