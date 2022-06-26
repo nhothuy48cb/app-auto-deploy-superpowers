@@ -27,17 +27,17 @@ In this project, you will prove your mastery of the following learning objective
 |:-----|:-----|:-----|
 |Utilize Deployment Strategies to design and build CI/CD pipelines that support Continuous Delivery processes.|A public git repository with your project code. ||
 ||***Console output of various pre-deploy job failure scenarios:***||
-||Build Jobs that failed because of compile errors. |[SCREENSHOT01](./screenshots/SCREENSHOT01.jpg)|
-||Failed unit tests. |[SCREENSHOT02](./screenshots/SCREENSHOT02.jpg)|
-||Failure because of vulnerable packages. |[SCREENSHOT03](./screenshots/SCREENSHOT03.jpg)|
+||Build Jobs that failed because of compile errors. |[SCREENSHOT01](./screenshots/SCREENSHOT01.png)|
+||Failed unit tests. |[SCREENSHOT02](./screenshots/SCREENSHOT02.png)|
+||Failure because of vulnerable packages. |[SCREENSHOT03](./screenshots/SCREENSHOT03.png)|
 ||An alert from one of your failed builds. ||
 ||***Evidence in your code that:*** Compile errors have been fixed.<br>Unit tests have been fixed.<br>All critical security vulnerabilities caught by the “Analyze” job have been fixed|[.circleci](./.circleci)<br>[backend](./backend)<br>[frontend](./frontend)|
 |Utilize a configuration management tool to accomplish deployment to cloud-based servers.|Console output of appropriate failure for infrastructure creation job (using CloudFormation). |[SCREENSHOT05](./screenshots/SCREENSHOT05.jpg)|
-||Console output of a smoke test job that is failing appropriately. |[SCREENSHOT06](./screenshots/SCREENSHOT06.jpg)|
-||Console output of a successful rollback after a failed smoke test. |[SCREENSHOT07](./screenshots/SCREENSHOT07.jpg)|
-||Console output of successful promotion of new version to production in CloudFront. |[SCREENSHOT08](./screenshots/SCREENSHOT08.jpg)|
-||Console output of successful cleanup job that removes old S3 bucket and EC2 instance. |[SCREENSHOT09](./screenshots/SCREENSHOT09.jpg)|
-||Evidence that the deploy jobs only happen on the `master` branch. |[SCREENSHOT10](./screenshots/SCREENSHOT10.jpg)|
+||Console output of a smoke test job that is failing appropriately. |[SCREENSHOT06](./screenshots/SCREENSHOT06.png)|
+||Console output of a successful rollback after a failed smoke test. |[SCREENSHOT07](./screenshots/SCREENSHOT07.png)|
+||Console output of successful promotion of new version to production in CloudFront. |[SCREENSHOT08](./screenshots/SCREENSHOT08.png)|
+||Console output of successful cleanup job that removes old S3 bucket and EC2 instance. |[SCREENSHOT09](./screenshots/SCREENSHOT09.png)|
+||Evidence that the deploy jobs only happen on the `master` branch. |[SCREENSHOT10](./screenshots/SCREENSHOT10.png)|
 ||Evidence of deployed and functioning front-end application in an S3 bucket .||
 ||Evidence of deployed and functioning front-end application in CloudFront. ||
 ||Evidence of healthy back-end application. ||
@@ -46,6 +46,6 @@ In this project, you will prove your mastery of the following learning objective
 |:-----|:-----|:-----|
 |Surface critical server errors for diagnosis using centralized logging.|Evidence of Prometheus Server. ||
 ||Evidence that Prometheus is monitoring memory, cpu and disk usage of EC2 instances. ||
-||Evidence that Prometheus and AlertManager send alerts when certain conditions exist in the EC2 instance. |[SCREENSHOT12](./screenshots/SCREENSHOT12.jpg)|
+||Evidence that Prometheus and AlertManager send alerts when certain conditions exist in the EC2 instance. |[SCREENSHOT12](./screenshots/SCREENSHOT12.png)|
 ### License
 [License](LICENSE.md)
