@@ -38,8 +38,8 @@ In this project, you will prove your mastery of the following learning objective
 ||Console output of successful promotion of new version to production in CloudFront. |[SCREENSHOT08](./screenshots/SCREENSHOT08.png)|
 ||Console output of successful cleanup job that removes old S3 bucket and EC2 instance. |[SCREENSHOT09](./screenshots/SCREENSHOT09.png)|
 ||Evidence that the deploy jobs only happen on the `master` branch. |[SCREENSHOT10](./screenshots/SCREENSHOT10.png)|
-||Evidence of deployed and functioning front-end application in an S3 bucket .|[URL02]<br>[URL02_SCREENSHOT](./screenshots/[URL02_SCREENSHOT.png)|
-||Evidence of deployed and functioning front-end application in CloudFront. |[URL03]<br>[URL03_SCREENSHOT_01](./screenshots/[URL03_SCREENSHOT_01.png)<br>[URL03_SCREENSHOT_02](./screenshots/[URL03_SCREENSHOT_02.png)|
+||Evidence of deployed and functioning front-end application in an S3 bucket .|[URL02]<br>[URL02_SCREENSHOT](./screenshots/URL02_SCREENSHOT.png)|
+||Evidence of deployed and functioning front-end application in CloudFront. |[URL03]<br>[URL03_SCREENSHOT_01](./screenshots/URL03_SCREENSHOT_01.png)<br>[URL03_SCREENSHOT_02](./screenshots/URL03_SCREENSHOT_02.png)|
 ||Evidence of healthy back-end application. |[URL04]<br>[URL04_SCREENSHOT](./screenshots/URL04_SCREENSHOT.png)|
 #### Section 3: Turn Errors into Sirens
 |CRITERIA|MEETS SPECIFICATIONS |Files |
