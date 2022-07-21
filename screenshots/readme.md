@@ -32,8 +32,17 @@
 ## [SCREENSHOT10](./SCREENSHOT10.png)
   ![SCREENSHOT10.png](./SCREENSHOT10.png)
   
-## [SCREENSHOT11](./SCREENSHOT11.png)
-  ![SCREENSHOT11.png](./SCREENSHOT11.png)
+## [SCREENSHOT11_cpu.png](./SCREENSHOT11_cpu.png)
+  ![SCREENSHOT11_cpu.png](./SCREENSHOT11_cpu.png)
+
+## [SCREENSHOT11_cpu.png](./SCREENSHOT11_cpu.png)
+  ![SCREENSHOT11_cpu.png](./SCREENSHOT11_cpu.png)
+  
+## [SCREENSHOT11_disk.png](./SCREENSHOT11_disk.png)
+  ![SCREENSHOT11_disk.png](./SCREENSHOT11_disk.png)
+
+## [SCREENSHOT11_memory.png](./SCREENSHOT11_memory.png)
+  ![SCREENSHOT11_memory.png](./SCREENSHOT11_memory.png)
     
 ## [SCREENSHOT12](./SCREENSHOT12.png)
   ![SCREENSHOT12.png](./SCREENSHOT12.png)
